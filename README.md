@@ -29,6 +29,10 @@ code: [sqlite_read_record.py](https://github.com/YoEugene/PTT_ChatBot_2017S/blob
 1. 方法一：把 table_cursor 當作 iterator 一行一行讀出來
 
 ```python
+conn = sqlite3.connect('ptt.db')
+print("Opened database successfully")
+table_cursor = conn.cursor()
+
 table_cursor = conn.execute("SELECT * from Gossiping")
 
 for row in table_cursor:
@@ -47,6 +51,10 @@ for row in table_cursor:
 2. 方法二：使用 table_cursor 的 fetchone() method 一次讀取一行
 
 ```python
+conn = sqlite3.connect('ptt.db')
+print("Opened database successfully")
+table_cursor = conn.cursor()
+
 table_cursor = conn.execute("SELECT * from Gossiping")
 
 print(table_cursor.fetchone())
@@ -54,9 +62,13 @@ print(table_cursor.fetchone())
 print(table_cursor.fetchone())
 ```
 
-3. 讀取 Table 中含有特定值的 record
+3. 方法三：讀取 Table 中含有特定值的 record
 
 ```python
+conn = sqlite3.connect('ptt.db')
+print("Opened database successfully")
+table_cursor = conn.cursor()
+
 # 從 Gossiping 版搜尋 push 大於 100 的 record，顯示 title, push, boo 並以 push 數降序排列
 table_cursor = conn.execute("SELECT title, push, boo FROM Gossiping where push > 100 ORDER BY push DESC" )
 
@@ -72,6 +84,7 @@ code: [sqlite_read_record.py 最後一段](https://github.com/YoEugene/PTT_ChatB
 
 ```python
 conn = sqlite3.connect('ptt.db')
+print("Opened database successfully")
 table_cursor = conn.cursor()
 
 # put values you want to insert here
