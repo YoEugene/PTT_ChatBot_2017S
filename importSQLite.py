@@ -22,6 +22,7 @@ json_file_list = ["data/AllTogether-2812-3312.json", "data/Baseball-4530-5030.js
 conn = sqlite3.connect('ptt.db')
 print("Opened database successfully")
 c = conn.cursor()
+c.execute("DELETE FROM Articles")
 
 for i in range(len(board_list)):
     board = board_list[i]
@@ -40,7 +41,6 @@ for i in range(len(board_list)):
     pt = False
 
     try:
-        c.execute("DELETE FROM " + board)
 
         # Insert a row of data
         for article in articles:
@@ -64,15 +64,15 @@ for i in range(len(board_list)):
             neutral = article["message_conut"]["neutral"] if "message_conut" in article else "NULL"
             boo = article["message_conut"]["boo"] if "message_conut" in article else "NULL"
 
-            params = (articleId, category, title, author, date, content, ip, push, neutral, boo)
+            params = (board, articleId, category, title, author, date, content, ip, push, neutral, boo)
 
-            c.execute("INSERT INTO " + board + "  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", params)
+            c.execute("INSERT INTO Articles  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", params)
 
         conn.commit()
         print("Successful. " + board)
     except Exception as e:
         print("Failed. " + board + ' for ' + str(e))
 
-    time.sleep(3)
+    # time.sleep(3)
 
 conn.close()

@@ -1,3 +1,5 @@
+# [SQLite DB 檔案請點我](https://drive.google.com/open?id=0BzmSKRMkEppueThoZ3VPX0dEeDg)
+
 ### 創造 Table
 
 code: [sqlite_create_table.py](https://github.com/YoEugene/PTT_ChatBot_2017S/blob/master/sqlite_create_table.py)
@@ -5,7 +7,7 @@ code: [sqlite_create_table.py](https://github.com/YoEugene/PTT_ChatBot_2017S/blo
 執行指令：
 
 ```python
-c.execute("CREATE TABLE Gossiping (articleId text, category text, ... , push real, boo real)")
+c.execute("CREATE TABLE Articles (articleId text, category text, ... , push real, boo real)")
 ```
 
 若成功會顯示：
@@ -17,7 +19,7 @@ Table created successfully.
 否則顯示：
 
 ```
-Gossiping already existed.
+Articles already existed.
 ```
 
 ***
@@ -33,7 +35,7 @@ conn = sqlite3.connect('ptt.db')
 print("Opened database successfully")
 table_cursor = conn.cursor()
 
-table_cursor = conn.execute("SELECT * from Gossiping")
+table_cursor = conn.execute("SELECT * from Articles")
 
 for row in table_cursor:
     print("articleId = " + str(row[0]))
@@ -55,7 +57,7 @@ conn = sqlite3.connect('ptt.db')
 print("Opened database successfully")
 table_cursor = conn.cursor()
 
-table_cursor = conn.execute("SELECT * from Gossiping")
+table_cursor = conn.execute("SELECT * from Articles")
 
 print(table_cursor.fetchone())
 print(table_cursor.fetchone())
@@ -69,8 +71,8 @@ conn = sqlite3.connect('ptt.db')
 print("Opened database successfully")
 table_cursor = conn.cursor()
 
-# 從 Gossiping 版搜尋 push 大於 100 的 record，顯示 title, push, boo 並以 push 數降序排列
-table_cursor = conn.execute("SELECT title, push, boo FROM Gossiping where push > 100 ORDER BY push DESC" )
+# 從 Articles table 搜尋 push 大於 100 的 record，顯示 title, push, boo 並以 push 數降序排列
+table_cursor = conn.execute("SELECT title, push, boo FROM Articles where push > 100 ORDER BY push DESC" )
 
 for row in table_cursor:
     print(row)
@@ -89,7 +91,7 @@ table_cursor = conn.cursor()
 
 # put values you want to insert here
 params = [, , , , , , , ... ]
-table_cursor.execute("INSERT INTO Gossiping VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", params)
+table_cursor.execute("INSERT INTO Articles VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", params)
 
 # 一定要下面這行才能完成插入
 conn.commit()
