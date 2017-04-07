@@ -5,7 +5,7 @@ code: [sqlite_create_table.py](https://github.com/YoEugene/PTT_ChatBot_2017S/blo
 執行指令：
 
 ```python
-c.execute("CREATE TABLE [Gossiping] (articleId text, category text, ... , push real, boo real)")
+c.execute("CREATE TABLE Gossiping (articleId text, category text, ... , push real, boo real)")
 ```
 
 若成功會顯示：
